@@ -37,6 +37,7 @@ jobs:
         run: snyk test --all-projects
 
       - name: Run Snyk Code scan
+        if: vars.ENABLE_SNYK_CODE == 'true'
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: snyk code test
