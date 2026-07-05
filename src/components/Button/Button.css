@@ -1,0 +1,62 @@
+.button-base {
+  align-items: center;
+  border-radius: 0.75rem;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.875rem;
+  font-weight: 600;
+  gap: 0.5rem;
+  justify-content: center;
+  line-height: 1;
+  padding: 0.625rem 1rem;
+  transition: background-color 200ms ease-out, box-shadow 200ms ease-out,
+    border-color 200ms ease-out, color 200ms ease-out;
+}
+
+.button-base:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.button-base:focus-visible {
+  outline: 2px solid var(--suthra-color-focus, #60a5fa);
+  outline-offset: 2px;
+}
+
+.button-normal {
+  background: var(--suthra-color-surface, #ffffff);
+  border-color: var(--suthra-color-border, #d1d5db);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+  color: var(--suthra-color-foreground, #111827);
+}
+
+.button-normal:hover:not(:disabled) {
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.16);
+}
+
+.button-glass {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: var(--suthra-color-glass, rgba(255, 255, 255, 0.2));
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.12);
+  color: var(--suthra-color-foreground, #111827);
+}
+
+.button-glass:hover:not(:disabled) {
+  background: var(--suthra-color-glass-hover, rgba(255, 255, 255, 0.28));
+}
+
+.button-modern {
+  background: var(--suthra-color-modern-bg, #111827);
+  border-color: var(--suthra-color-modern-border, #60a5fa);
+  box-shadow: 0 0 0 0 var(--suthra-color-modern-glow, rgba(96, 165, 250, 0.6));
+  color: var(--suthra-color-modern-fg, #f9fafb);
+}
+
+.button-modern:hover:not(:disabled),
+.button-modern:focus-visible {
+  box-shadow: 0 0 18px 2px var(--suthra-color-modern-glow, rgba(96, 165, 250, 0.6));
+}
