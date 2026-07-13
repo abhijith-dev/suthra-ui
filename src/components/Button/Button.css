@@ -49,6 +49,8 @@
   background: var(--suthra-color-glass-hover, rgba(255, 255, 255, 0.28));
 }
 
+/* add more styles for different button variants as needed */
+
 .button-modern {
   background: var(--suthra-color-modern-bg, #111827);
   border-color: var(--suthra-color-modern-border, #60a5fa);
