@@ -40,5 +40,12 @@ jobs:
       - name: Build package
         run: pnpm build
 
-      - name: Publish package
+      - name: Publish package with npm token
+        if: ${{ secrets.NPM_TOKEN != '' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public --provenance
+
+      - name: Publish package with trusted publishing
+        if: ${{ secrets.NPM_TOKEN == '' }}
         run: npm publish --access public --provenance
