@@ -1,0 +1,36 @@
+:root {
+  --suthra-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    Roboto, Helvetica, Arial, sans-serif;
+  --suthra-text-xs: 0.75rem;
+  --suthra-text-sm: 0.875rem;
+  --suthra-text-base: 1rem;
+  --suthra-font-weight-medium: 500;
+  --suthra-space-1: 0.25rem;
+  --suthra-space-2: 0.5rem;
+  --suthra-space-3: 0.75rem;
+  --suthra-space-4: 1rem;
+  --suthra-space-9: 2.25rem;
+  --suthra-radius-md: 0.5rem;
+  --suthra-radius-lg: 0.75rem;
+  --suthra-duration-normal: 180ms;
+  --suthra-ease-ease: ease;
+  --suthra-color-primary-500: #3b82f6;
+  --suthra-color-success-500: #22c55e;
+  --suthra-color-danger-500: #ef4444;
+  --suthra-color-neutral-300: #d1d5db;
+  --suthra-color-neutral-400: #9ca3af;
+  --suthra-color-neutral-700: #374151;
+  --suthra-color-neutral-900: #111827;
+  --suthra-color-glass-white10: rgba(255, 255, 255, 0.1);
+  --suthra-color-glass-border: rgba(255, 255, 255, 0.28);
+  --suthra-blur-md: 12px;
+  --suthra-shadow-inner-sm: inset 0 0 0 1px rgba(59, 130, 246, 0.25);
+  --suthra-shadow-glass-sm: 0 8px 22px rgba(15, 23, 42, 0.22);
+  --suthra-shadow-glow-primary: 0 0 18px 2px rgba(59, 130, 246, 0.55);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--suthra-font-sans);
+}

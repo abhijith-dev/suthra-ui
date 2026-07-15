@@ -1,6 +1,6 @@
 # @suthra/ui
 
-Production-focused React component library with strong defaults, flexible variants, and clean TypeScript types.
+Modern React component library with strong TypeScript types, design tokens, animation hooks, and icon-ready APIs.
 
 [![npm version](https://img.shields.io/npm/v/@suthra/ui)](https://www.npmjs.com/package/@suthra/ui)
 [![license](https://img.shields.io/npm/l/@suthra/ui)](https://www.npmjs.com/package/@suthra/ui)
@@ -8,298 +8,244 @@ Production-focused React component library with strong defaults, flexible varian
 
 ## Why Suthra UI
 
-- Consistent API across components: `variant`, `size`, `state`, `intent` patterns.
-- Built for modern product UIs: normal, glass, and modern visual styles.
-- Type-safe by default with exported prop types.
-- Easy to compose with your app styles and icons.
+- Consistent API patterns across components: `variant`, `size`, `state`.
+- Visual variants built in: `normal`, `glass`, `dark`.
+- Advanced style controls: `radius`, `fullWidth`, `elevated`, `animated`.
+- Motion and theme tokens included via CSS variables.
+- Lucide icon support and icon exports included.
+- Storybook-ready with all components documented.
 
 ## Installation
 
 ```bash
-pnpm add @suthra/ui
+pnpm add @suthra/ui react react-dom
 ```
-
-Peer dependencies:
-
-- `react@^18.3.1`
-- `react-dom@^18.3.1`
 
 ## Quick Start
 
 ```tsx
-import { Button, Input } from "@suthra/ui";
+import { Button, Input, Sparkles } from "@suthra/ui";
 
 export function Demo() {
-	return (
-		<div style={{ display: "grid", gap: 16, maxWidth: 420 }}>
-			<Input
-				label="Email"
-				type="email"
-				placeholder="you@company.com"
-				hint="We never share your email."
-			/>
+  return (
+    <div style={{ display: "grid", gap: 16, maxWidth: 420 }}>
+      <Input
+        label="Email"
+        type="email"
+        placeholder="you@company.com"
+        hint="We never share your email."
+        variant="normal"
+        animated
+      />
 
-			<Button intent="primary" size="md">
-				Continue
-			</Button>
-		</div>
-	);
+      <Button
+        intent="primary"
+        variant="dark"
+        elevated
+        leftIcon={<Sparkles size={16} />}
+      >
+        Continue
+      </Button>
+    </div>
+  );
 }
 ```
 
-## Styling Requirements
+## Styling Model
 
-Current components use two styling approaches:
+Suthra UI ships CSS styles and design tokens out of box.
 
-- `Button`: utility classes (Tailwind-compatible class names)
-- `Input`: CSS Modules + design tokens (`--suthra-*` variables)
+- Global tokens file: `src/styles/tokens.css`
+- Shared motion + surface system: `src/components/_shared/common.module.css`
+- Component-specific CSS:
+  - Button: `src/components/Button/Button.css`
+  - Input: `src/components/Input/Input.module.css`
+  - Other components use shared module base + local modules
 
-### 1) Tailwind-Compatible Utilities (for Button)
+### Core Tokens
 
-`Button` uses utility classes like `bg-blue-600`, `rounded-xl`, and custom shadows like `shadow-glow-primary`.
+Key token groups exposed:
 
-If you use Tailwind, add custom shadows:
+- Typography: `--suthra-font-sans`, `--suthra-text-*`
+- Spacing: `--suthra-space-*`
+- Radius: `--suthra-radius-*`
+- Colors: `--suthra-color-*`
+- Shadows: `--suthra-shadow-*`
+- Motion:
+  - `--suthra-motion-duration-fast`
+  - `--suthra-motion-duration-normal`
+  - `--suthra-motion-duration-slow`
+  - `--suthra-motion-ease-standard`
+  - `--suthra-motion-ease-emphasized`
 
-```ts
-// tailwind.config.ts
-import type { Config } from "tailwindcss";
+### Global Variant System
 
-export default {
-	theme: {
-		extend: {
-			boxShadow: {
-				"glass-sm": "0 6px 20px rgba(15, 23, 42, 0.12)",
-				"glow-primary": "0 0 18px 2px rgba(59, 130, 246, 0.55)"
-			}
-		}
-	}
-} satisfies Config;
+Most components support:
+
+- `variant`: `"normal" | "glass" | "dark"`
+- `size`: `"sm" | "md" | "lg"`
+- `state`: `"default" | "error" | "success"`
+
+Advanced style props are available on key form/action components (Button, Input):
+
+- `radius`: `"sm" | "md" | "lg" | "pill"`
+- `fullWidth`: `boolean`
+- `elevated`: `boolean`
+- `animated`: `boolean`
+
+## Icons
+
+Library uses `lucide-react` and re-exports common icons:
+
+```tsx
+import { AlertCircle, Bell, Sparkles } from "@suthra/ui";
 ```
 
-### 2) Design Tokens (for Input)
+Components with icon prop support today:
 
-Define these CSS variables in your global stylesheet. Suggested defaults:
+- `Alert` (`icon`)
+- `Toast` (`icon`)
+- `Dialog` (`icon`)
+- `Drawer` (`icon`)
+- `Button` (`leftIcon`, `rightIcon`)
+- `Input` (`leftElement`, `rightElement`)
 
-```css
-:root {
-	--suthra-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI,
-		Roboto, Helvetica, Arial, sans-serif;
+## Storybook
 
-	--suthra-text-xs: 0.75rem;
-	--suthra-text-sm: 0.875rem;
-	--suthra-text-base: 1rem;
+Run component docs locally:
 
-	--suthra-font-weight-medium: 500;
-
-	--suthra-space-1: 0.25rem;
-	--suthra-space-3: 0.75rem;
-	--suthra-space-4: 1rem;
-	--suthra-space-9: 2.25rem;
-
-	--suthra-radius-md: 0.5rem;
-	--suthra-radius-lg: 0.75rem;
-
-	--suthra-duration-normal: 180ms;
-	--suthra-ease-ease: ease;
-
-	--suthra-color-primary-500: #3b82f6;
-	--suthra-color-success-500: #22c55e;
-	--suthra-color-danger-500: #ef4444;
-
-	--suthra-color-neutral-300: #d1d5db;
-	--suthra-color-neutral-400: #9ca3af;
-	--suthra-color-neutral-700: #374151;
-	--suthra-color-neutral-900: #111827;
-
-	--suthra-color-glass-white10: rgba(255, 255, 255, 0.1);
-	--suthra-color-glass-border: rgba(255, 255, 255, 0.28);
-
-	--suthra-blur-md: 12px;
-
-	--suthra-shadow-inner-sm: inset 0 0 0 1px rgba(59, 130, 246, 0.25);
-	--suthra-shadow-glass-sm: 0 8px 22px rgba(15, 23, 42, 0.22);
-	--suthra-shadow-glow-primary: 0 0 18px 2px rgba(59, 130, 246, 0.55);
-}
+```bash
+pnpm storybook
 ```
 
-## Component Documentation
+Build static docs:
+
+```bash
+pnpm build-storybook
+```
+
+## Component Docs
 
 ### Button
-
-Import:
 
 ```tsx
 import { Button } from "@suthra/ui";
 import type { ButtonProps } from "@suthra/ui";
 ```
 
-Usage:
-
 ```tsx
-<Button variant="normal" intent="primary" size="md">
-	Save Changes
-</Button>
-
-<Button variant="glass" intent="outline" leftIcon={<span>+</span>}>
-	New Item
-</Button>
-
-<Button variant="modern" intent="danger" isLoading>
-	Deleting...
+<Button variant="normal" intent="primary">Save</Button>
+<Button variant="glass" intent="outline" radius="pill">Preview</Button>
+<Button variant="dark" intent="danger" isLoading elevated>
+  Deleting
 </Button>
 ```
 
-Props:
-
-| Prop | Type | Default | Notes |
-| --- | --- | --- | --- |
-| `variant` | `"normal" \| "glass" \| "modern"` | `"normal"` | Visual style |
-| `intent` | `"primary" \| "secondary" \| "danger" \| "ghost" \| "outline"` | `"primary"` | Semantic intent |
-| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` | Height and padding |
-| `isLoading` | `boolean` | `false` | Shows spinner and disables button |
-| `leftIcon` | `ReactNode` | `undefined` | Icon before label |
-| `rightIcon` | `ReactNode` | `undefined` | Icon after label |
-| `...button props` | `ButtonHTMLAttributes<HTMLButtonElement>` | - | Native button attributes |
-
-Notes:
-
-- `isLoading` forces disabled state.
-- `disabled` and `isLoading` both block pointer events.
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"normal" \| "glass" \| "dark"` | `"normal"` |
+| `intent` | `"primary" \| "secondary" \| "danger" \| "ghost" \| "outline"` | `"primary"` |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `"md"` |
+| `radius` | `"sm" \| "md" \| "lg" \| "pill"` | `"md"` |
+| `fullWidth` | `boolean` | `false` |
+| `elevated` | `boolean` | `false` |
+| `animated` | `boolean` | `true` |
+| `isLoading` | `boolean` | `false` |
+| `leftIcon` | `ReactNode` | `undefined` |
+| `rightIcon` | `ReactNode` | `undefined` |
 
 ### Input
-
-Import:
 
 ```tsx
 import { Input } from "@suthra/ui";
 import type { InputProps } from "@suthra/ui";
 ```
 
-Usage:
-
 ```tsx
-<Input
-	label="Password"
-	type="password"
-	variant="modern"
-	size="md"
-	hint="Use at least 12 characters"
-/>
-
-<Input
-	label="Username"
-	leftElement={<span>@</span>}
-	error="Username already taken"
-/>
-
-<Input
-	label="Search"
-	placeholder="Find components"
-	rightElement={<kbd>Ctrl+K</kbd>}
-/>
+<Input label="Password" variant="dark" hint="At least 12 chars" />
+<Input label="Username" leftElement={<span>@</span>} error="Taken" />
+<Input label="Search" rightElement={<kbd>Ctrl+K</kbd>} elevated />
 ```
 
-Props:
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"normal" \| "glass" \| "dark"` | `"normal"` |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `state` | `"default" \| "error" \| "success"` | `"default"` |
+| `radius` | `"sm" \| "md" \| "lg" \| "pill"` | `"md"` |
+| `fullWidth` | `boolean` | `false` |
+| `elevated` | `boolean` | `false` |
+| `animated` | `boolean` | `true` |
+| `label` | `string` | `undefined` |
+| `hint` | `string` | `undefined` |
+| `error` | `string` | `undefined` |
+| `leftElement` | `ReactNode` | `undefined` |
+| `rightElement` | `ReactNode` | `undefined` |
+| `isLoading` | `boolean` | `false` |
 
-| Prop | Type | Default | Notes |
-| --- | --- | --- | --- |
-| `variant` | `"normal" \| "glass" \| "modern"` | `"normal"` | Visual style |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Control height |
-| `state` | `"default" \| "error" \| "success"` | `"default"` | Manual state |
-| `label` | `string` | `undefined` | Accessible label text |
-| `hint` | `string` | `undefined` | Helper text when no `error` |
-| `error` | `string` | `undefined` | Error text and error state override |
-| `leftElement` | `ReactNode` | `undefined` | Left adornment |
-| `rightElement` | `ReactNode` | `undefined` | Right adornment |
-| `isLoading` | `boolean` | `false` | Replaces right element with spinner |
-| `className` | `string` | `undefined` | Wrapper class |
-| `...input props` | `InputHTMLAttributes<HTMLInputElement>` | - | Native input attributes |
+## Full Component Catalog
 
-Notes:
+All components below are currently available and exported from package root:
 
-- If `error` provided, effective state becomes `error`.
-- Component auto-generates `id` if missing, then binds `label` with `htmlFor`.
-
-## Component Catalog (35)
-
-This package targets 35+ production components. Current release includes `Button` and `Input`.
-
-| Component | Category | Status | Description |
-| --- | --- | --- | --- |
-| Button | Actions | Available | Primary action button with variants and loading |
-| IconButton | Actions | Planned | Icon-only action button |
-| SplitButton | Actions | Planned | Primary action + dropdown trigger |
-| ToggleButton | Actions | Planned | Pressed/unpressed button state |
-| LinkButton | Actions | Planned | Button styles with anchor semantics |
-| Input | Forms | Available | Text input with label, hint, and status |
-| Textarea | Forms | Planned | Multi-line text control |
-| Select | Forms | Planned | Single-select dropdown |
-| MultiSelect | Forms | Planned | Multi-value selection control |
-| Checkbox | Forms | Planned | Boolean field with label |
-| RadioGroup | Forms | Planned | Single choice from options |
-| Switch | Forms | Planned | On/off toggle control |
-| Slider | Forms | Planned | Numeric range slider |
-| OTPInput | Forms | Planned | One-time-code segmented input |
-| DatePicker | Forms | Planned | Date selection calendar input |
-| TimePicker | Forms | Planned | Time-only selector |
-| FormField | Forms | Planned | Label, control, hint, error wrapper |
-| Badge | Data Display | Planned | Small status badge |
-| Avatar | Data Display | Planned | User avatar with fallback |
-| Card | Data Display | Planned | Surface container with slots |
-| Stat | Data Display | Planned | Metric block with trend |
-| Tooltip | Overlays | Planned | Hover/focus informational popup |
-| Popover | Overlays | Planned | Anchored floating content |
-| Dialog | Overlays | Planned | Modal with focus management |
-| Drawer | Overlays | Planned | Slide-in side panel |
-| Toast | Feedback | Planned | Timed non-blocking notifications |
-| Alert | Feedback | Planned | Inline status message |
-| Progress | Feedback | Planned | Determinate/indeterminate progress |
-| Spinner | Feedback | Planned | Loading activity indicator |
-| Tabs | Navigation | Planned | Section switcher by tab |
-| Breadcrumb | Navigation | Planned | Hierarchical location path |
-| Pagination | Navigation | Planned | Paged list navigation |
-| Accordion | Layout | Planned | Expand/collapse grouped content |
-| Divider | Layout | Planned | Visual content separator |
-| Skeleton | Feedback | Planned | Placeholder loading shapes |
-
-## Accessibility Principles
-
-- Keyboard-first interaction for all actionable components.
-- Focus-visible states required for every control.
-- Semantic HTML first, ARIA only when necessary.
-- Labels, hints, and errors tied to controls.
+- `Button`
+- `IconButton`
+- `SplitButton`
+- `ToggleButton`
+- `LinkButton`
+- `Input`
+- `Textarea`
+- `Select`
+- `MultiSelect`
+- `Checkbox`
+- `RadioGroup`
+- `Switch`
+- `Slider`
+- `OTPInput`
+- `DatePicker`
+- `TimePicker`
+- `FormField`
+- `Badge`
+- `Avatar`
+- `Card`
+- `Stat`
+- `Tooltip`
+- `Popover`
+- `Dialog`
+- `Drawer`
+- `Toast`
+- `Alert`
+- `Progress`
+- `Spinner`
+- `Tabs`
+- `Breadcrumb`
+- `Pagination`
+- `Accordion`
+- `Divider`
+- `Skeleton`
 
 ## TypeScript Support
 
-Package ships declaration files and exports key prop types:
+Types exported for all components.
 
 ```tsx
-import type { ButtonProps, InputProps } from "@suthra/ui";
+import type {
+  ButtonProps,
+  InputProps,
+  DialogProps,
+  TabsProps,
+  AccordionProps
+} from "@suthra/ui";
 ```
 
-## Changelog Strategy
-
-- `feat:` new component or additive API
-- `fix:` bug fixes without breaking changes
-- `perf:` runtime or bundle performance improvements
-- `refactor:` internal cleanup with no API change
-
-## Contributing
+## Development
 
 ```bash
 pnpm install
 pnpm build
 pnpm lint
+pnpm storybook
 ```
-
-For component contributions, include:
-
-- component implementation
-- exported types
-- variant contract
-- README usage and prop table updates
 
 ## License
 
 MIT
-

@@ -14,6 +14,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       variant = "normal",
       size = "md",
       state = "default",
+      radius = "md",
+      fullWidth = false,
+      elevated = false,
+      animated = true,
       label,
       hint,
       error,
@@ -43,6 +47,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         data-variant={variant}
         data-size={size}
         data-state={effectiveState}
+        data-radius={radius}
+        data-full-width={fullWidth}
+        data-elevated={elevated}
+        data-animated={animated}
       >
         {label ? (
           <label className={styles.label} htmlFor={inputId}>

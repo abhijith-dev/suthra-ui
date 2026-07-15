@@ -9,4 +9,8 @@ export interface ButtonProps
   isLoading?: boolean;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  radius?: "sm" | "md" | "lg" | "pill";
+  fullWidth?: boolean;
+  elevated?: boolean;
+  animated?: boolean;
 }

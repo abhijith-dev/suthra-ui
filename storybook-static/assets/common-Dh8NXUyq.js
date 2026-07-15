@@ -1,0 +1,1 @@
+function i({variant:a="normal",size:t="md",state:d="default",radius:e="md",fullWidth:l=!1,elevated:r=!1,animated:s=!0}){return{"data-variant":a,"data-size":t,"data-state":d,"data-radius":e,"data-full-width":l,"data-elevated":r,"data-animated":s}}export{i as v};

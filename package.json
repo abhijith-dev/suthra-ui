@@ -1,14 +1,14 @@
 {
   "name": "@suthra/ui",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Suthra UI: modern, type-safe React component library.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "packageManager": "pnpm@9",
+  "packageManager": "pnpm@8.9.1",
   "publishConfig": {
     "access": "public"
   },
@@ -53,7 +53,9 @@
     "dev": "vite",
     "build": "tsc -p tsconfig.build.json && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "peerDependencies": {
     "react": "^18.3.1",
@@ -61,16 +63,23 @@
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1"
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.542.0"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^8.6.14",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
     "@types/node": "^24.13.2",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^6.0.3",
+    "@vitejs/plugin-react": "^5.0.4",
     "oxlint": "^1.71.0",
+    "storybook": "^8.6.14",
     "typescript": "~6.0.2",
-    "vite": "^8.1.1"
+    "vite": "^6.4.1"
   },
   "author": {
     "name": "Abhijith Shetty",
