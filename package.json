@@ -2,10 +2,39 @@
   "name": "@suthra/ui",
   "private": false,
   "version": "0.1.0",
+  "description": "Suthra UI: modern, type-safe React component library.",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "packageManager": "pnpm@9",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhijith-dev/suthra-ui.git"
+  },
+  "homepage": "https://github.com/abhijith-dev/suthra-ui#readme",
+  "bugs": {
+    "url": "https://github.com/abhijith-dev/suthra-ui/issues"
+  },
+  "keywords": [
+    "suthra",
+    "ui",
+    "react",
+    "react-components",
+    "component-library",
+    "design-system",
+    "typescript",
+    "vite",
+    "cva",
+    "accessible"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "files": [
     "dist"
   ],
@@ -16,6 +45,7 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     }
   },
